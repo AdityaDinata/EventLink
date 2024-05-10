@@ -1,10 +1,9 @@
-/* Created by Tivotal */
 
 /* Google Fonts(Poppins) */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
 :root {
-  --theme-color: #3867d6;
+  --theme-color: #F836CB;
 }
 
 * {
@@ -19,6 +18,14 @@
   transition: 0.2s linear;
 }
 
+
+/* Untuk mengubah gaya tombol saat dihover */
+.btn-outline-danger:hover {
+  background-color: red;
+  border-color: red;
+  color: white;
+}
+
 html {
   font-size: 62.5%;
   overflow-x: hidden;
@@ -27,7 +34,8 @@ html {
 }
 
 body {
-  background: #222;
+  background: rgb(252,70,107);
+  background: radial-gradient(circle, rgba(252,70,107,1) 0%, rgba(63,94,251,1) 100%);
 }
 
 section {
@@ -480,70 +488,108 @@ html::-webkit-scrollbar-thumb {
     transform: rotate(360deg);
   }
 }
+/* Media queries */
 
-/* media queries  */
-
+/* Tablet */
 @media (max-width: 991px) {
   html {
-    font-size: 55%;
+    font-size: 75%; /* Mengatur ukuran font 75% dari ukuran aslinya */
+  }
+
+  body {
+    font-size: 1.2rem; /* Mengurangi ukuran font body */
   }
 
   .header {
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 2rem; /* Padding 1.5rem atas dan bawah, 2rem kiri dan kanan */
   }
 
   section {
-    padding: 2rem;
+    padding: 2rem; /* Padding 2rem untuk semua sisi */
+  }
+  
+  /* Menyesuaikan ukuran font pada navbar */
+  .header .navbar a {
+    font-size: 1.5rem;
+    padding: 1rem; /* Mengatur padding pada link navbar */
+    margin: 0 1rem; /* Mengatur margin pada link navbar */
   }
 }
 
+/* Mobile */
 @media (max-width: 768px) {
+  html {
+    font-size: 62.5%; /* Mengatur ukuran font 62.5% dari ukuran aslinya */
+  }
+
+  body {
+    font-size: 1rem; /* Mengurangi ukuran font body */
+  }
+
+  .header {
+    padding: 1.125rem 1.5rem; /* Padding 1.125rem atas dan bawah, 1.5rem kiri dan kanan */
+  }
+
   #menu-bars {
-    display: initial;
+    display: inline-block; /* Menampilkan menu bars */
   }
 
   .header .navbar {
-    position: absolute;
-    top: 100%;
+    position: absolute; /* Menetapkan posisi absolute untuk navbar */
+    top: 100%; /* Membuat navbar muncul di bawah header */
     left: 0;
     right: 0;
-    border-top: 0.1rem solid #222;
+    border-top: 0.1rem solid #222; /* Menambahkan border atas */
     background: #333;
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); /* Mengatur bentuk navbar */
   }
 
   .header .navbar.active {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); /* Mengubah bentuk navbar saat aktif */
   }
 
   .fa-times {
-    transform: rotate(180deg);
+    transform: rotate(180deg); /* Memutar ikon "close" 180 derajat */
   }
 
+  /* Menyesuaikan ukuran font pada navbar */
   .header .navbar a {
-    display: flex;
-    background: #222;
-    border-radius: 0.5rem;
-    padding: 1.3rem;
-    margin: 1.3rem;
-    font-size: 2rem;
+    font-size: 1.7rem;
+    padding: 1.3rem; /* Mengatur padding pada link navbar */
+    margin: 1.3rem; /* Mengatur margin pada link navbar */
   }
 
   .home .content h3 {
-    font-size: 4rem;
+    font-size: 4rem; /* Mengatur ukuran font untuk judul h3 */
   }
 }
 
+/* Mobile Small */
 @media (max-width: 450px) {
   html {
-    font-size: 50%;
+    font-size: 55%; /* Mengatur ukuran font 55% dari ukuran aslinya */
+  }
+  
+  body {
+    font-size: 0.9rem; /* Mengurangi ukuran font body */
+  }
+
+  .header {
+    padding: 0.75rem 1rem; /* Padding 0.75rem atas dan bawah, 1rem kiri dan kanan */
   }
 
   .home .home-slider .swiper-slide {
-    width: 27rem;
+    width: 27rem; /* Mengatur lebar slide pada slider di halaman home */
   }
 
   .contact form .inputBox input {
-    width: 100%;
+    width: 100%; /* Mengatur lebar input pada form kontak */
+  }
+
+  /* Menyesuaikan ukuran font pada navbar */
+  .header .navbar a {
+    font-size: 1.4rem;
+    padding: 1rem; /* Mengatur padding pada link navbar */
+    margin: 0.8rem; /* Mengatur margin pada link navbar */
   }
 }

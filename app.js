@@ -1,15 +1,15 @@
-/* Created by Tivotal */
+// JavaScript code here
 
 let menu = document.querySelector("#menu-bars");
 let navbar = document.querySelector(".navbar");
+let themeToggler = document.querySelector(".theme-toggler");
+let toggleBtn = document.querySelector(".toggle-btn");
 
 menu.onclick = () => {
   menu.classList.toggle("fa-times");
   navbar.classList.toggle("active");
 };
 
-let themeToggler = document.querySelector(".theme-toggler");
-let toggleBtn = document.querySelector(".toggle-btn");
 
 toggleBtn.onclick = () => {
   themeToggler.classList.toggle("active");
@@ -21,7 +21,6 @@ window.onscroll = () => {
   themeToggler.classList.remove("active");
 };
 
-// Fungsi untuk memuat tema yang dipilih saat halaman dimuat
 function loadSelectedTheme() {
   let selectedColor = localStorage.getItem("selectedThemeColor");
   if (selectedColor) {
@@ -29,23 +28,17 @@ function loadSelectedTheme() {
   }
 }
 
-// Memanggil fungsi untuk memuat tema yang dipilih saat halaman dimuat
 document.addEventListener("DOMContentLoaded", function() {
   loadSelectedTheme();
 });
 
-// Saat tombol tema dipilih
 document.querySelectorAll(".theme-toggler .theme-btn").forEach((btn) => {
   btn.onclick = () => {
     let color = btn.style.background;
     document.querySelector(":root").style.setProperty("--theme-color", color);
-
-    // Simpan warna yang dipilih di localStorage
     localStorage.setItem("selectedThemeColor", color);
   };
 });
-
-
 
 var swiper = new Swiper(".home-slider", {
   effect: "coverflow",
