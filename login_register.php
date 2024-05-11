@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Jika tidak ada kesalahan validasi, proses login
         if (empty($username_err) && empty($password_err)) {
             // Cari pengguna berdasarkan nama pengguna
-            $sql = "SELECT id, username, password, Role FROM users WHERE username = ?";
+            $sql = "SELECT id, username, password, member, Role FROM users WHERE username = ?";
             if ($stmt = mysqli_prepare($conn, $sql)) {
                 mysqli_stmt_bind_param($stmt, "s", $param_username);
                 $param_username = $username;
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     mysqli_stmt_store_result($stmt);
                     // Periksa apakah pengguna ada, jika ya, verifikasi kata sandi
                     if (mysqli_stmt_num_rows($stmt) == 1) {
-                        mysqli_stmt_bind_result($stmt, $id, $username, $db_password, $db_role);
+                        mysqli_stmt_bind_result($stmt, $id, $username, $db_password,$member, $db_role);
                         if (mysqli_stmt_fetch($stmt)) {
                             // Verifikasi kata sandi
                             if ($password === $db_password) { // Membandingkan secara langsung tanpa hashing
@@ -45,7 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     $_SESSION["loggedin"] = true;
                                     $_SESSION["id"] = $id;
                                     $_SESSION["username"] = $username;
+                                    $_SESSION["member"] = $member;
                                     $_SESSION["role"] = $db_role;
+                                    
                                     if ($role == "Admin") {
                                         header("location: admin.php");
                                     } elseif ($role == "Dokter") {
@@ -85,15 +87,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="images/logo3.png" rel="icon">
     <style>
         body {
-            background: rgb(252,70,107);
-            background: radial-gradient(circle, rgba(252,70,107,1) 0%, rgba(63,94,251,1) 100%);
-            /* background-color: #fff; Warna latar belakang di luar kotak login */
+            background: rgb(232,111,207);
+            background: linear-gradient(90deg, rgba(232,111,207,1) 5%, rgba(80,148,201,1) 94%);
         }
         .login-container {
-            background: rgb(63,94,251);
-            background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+            background: rgb(80,148,201);
+            background: linear-gradient(90deg, rgba(80,148,201,1) 5%, rgba(232,111,207,1) 94%);
             /* background-color: #c29b9e; Warna latar belakang kotak login */
             border-radius: 10px; /* Sudut melengkung kotak login */
             padding: 20px; /* Ruang dalam kotak login */

@@ -137,14 +137,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrasi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="images/logo3.png" rel="icon">
     <style>
         body {
-            background: rgb(252,70,107);
-            background: radial-gradient(circle, rgba(252,70,107,1) 0%, rgba(63,94,251,1) 100%);
+            background: rgb(80,148,201);
+            background: linear-gradient(90deg, rgba(80,148,201,1) 5%, rgba(232,111,207,1) 94%);
         }
         .card {
-            background: rgb(63,94,251);
-            background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+            background: rgb(232,111,207);
+            background: linear-gradient(90deg, rgba(232,111,207,1) 5%, rgba(80,148,201,1) 94%);
             border-radius: 10px; /* Sudut melengkung kotak registrasi */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Bayangan untuk efek kedalaman */
         }

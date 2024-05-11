@@ -1,10 +1,45 @@
 <?php
+session_start();
 require_once "crud_operations.php";
+
+// Cek apakah pengguna telah login dan memiliki status member premium
+if (!isset($_SESSION["loggedin"]) || $_SESSION["role"] != "User" || $_SESSION["member"] != "Premium") {
+    // Jika tidak, arahkan pengguna kembali ke halaman login
+    header("location: index2.php");
+    exit;
+}
 
 // Logika untuk menambah event
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Tambahkan logika untuk memproses data yang dikirim melalui form
 }
+
+// Mengambil data event berdasarkan ID pengguna
+function getAllDataByUserId($user_id) {
+    // Lakukan koneksi ke database
+    $conn = connectDB();
+
+    // Persiapkan kueri SQL untuk mengambil data event berdasarkan ID pengguna
+    $sql = "SELECT * FROM events WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Simpan hasil kueri dalam bentuk array
+    $data = array();
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+
+    // Tutup statement dan koneksi database
+    $stmt->close();
+    $conn->close();
+
+    // Kembalikan data event yang sudah diperoleh
+    return $data;
+}
+
 
 ?>
 
@@ -13,9 +48,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
+    <title>Permium Panel</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link href="images/logo3.png" rel="icon">
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -134,35 +170,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-3 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link text-white" style="font-size: 15px;" href="#Home">Beranda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" style="font-size: 15px;" href="#Agenda_Acara">Kategori Event</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" style="font-size: 15px;" href="#Tentang_Kami">Tentang Kami</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" style="font-size: 15px;" href="#Tentang_Kami">Gallery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" style="font-size: 15px;" href="#Tentang_Kami">Paket</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" style="font-size: 15px;" href="#Kontak">Kontak</a>
+                        <a class="nav-link text-white" style="font-size: 15px;" href="index2.php">Beranda</a>
                     </li>
                 </ul>
-                <form class="d-flex" method="post" action="login_register.php">
-                    <button class="btn btn-outline-danger btn-sm" type="submit" name="logout">Logout</button>
-                </form>
-
             </div>
         </div>
     </nav>
 
-
 <!-- Konten halaman -->
-<section class="page-section bg-light mb-2" id="alatbangunan">
+<section class="page-section bg-light mb-2" id="acarayangada">
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase mb-4">Katalog Events</h2>
@@ -170,7 +186,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="row">
             <?php
-            $data = getAllData();
+            // Ambil ID pengguna yang login
+            $user_id = $_SESSION["id"];
+
+            // Ambil data event yang berkaitan dengan ID pengguna yang login
+            $data = getAllDataByUserId($user_id);
             foreach ($data as $row) {
                 $id = $row['id'];
                 $nama = $row['nama'];
@@ -179,6 +199,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $gambar = $row['gambar'];
                 $kategori = $row['kategori'];
                 $static_map_url = $row['static_map_url'];
+                $status = $row['status'];
+                $tanggal =$row['tanggal']
             ?>
                 <div class="col-lg-4 col-sm-6 mb-4">
                     <div class="portfolio-item">
@@ -203,18 +225,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <!-- Hidden edit form -->
                 <div class="col-lg-4 col-sm-6 mb-4 edit-form" id="editForm_<?php echo $id; ?>" style="display:none;">
-                    <form action="edit.php" method="post">
-                        <input type="hidden" name="event_id" value="<?php echo $id; ?>">
-                        <input type="text" name="nama" placeholder="Nama Event" value="<?php echo $nama; ?>"><br>
-                        <input type="text" name="harga" placeholder="Harga" value="<?php echo $harga; ?>"><br>
-                        <textarea name="deskripsi" placeholder="Deskripsi"><?php echo $deskripsi; ?></textarea><br>
-                        <input type="text" name="kategori" placeholder="Kategori" value="<?php echo $kategori; ?>"><br>
-                        <input type="text" name="static_map_url" placeholder="Static Map URL" value="<?php echo $static_map_url; ?>"><br>
-                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                        <!-- Button to close the edit form -->
-                        <button type="button" class="btn btn-secondary btn-sm close-btn" data-eventid="<?php echo $id; ?>">Tutup</button>
-                    </form>
-                </div>
+                <form action="edit.php" method="post">
+                    <input type="hidden" name="event_id" value="<?php echo $id; ?>">
+                    <input type="text" name="nama" placeholder="Nama Event" value="<?php echo $nama; ?>"><br>
+                    <input type="text" name="harga" placeholder="Harga" value="<?php echo $harga; ?>"><br>
+                    <textarea name="deskripsi" placeholder="Deskripsi"><?php echo $deskripsi; ?></textarea><br>
+                    <div class="mb-3">
+                        <label for="kategori" class="form-label">Kategori</label>
+                        <select class="form-control" id="kategori" name="kategori">
+                            <option value="Leisure Event" <?php echo ($kategori == 'Leisure Event') ? 'selected' : ''; ?>>Leisure Event</option>
+                            <option value="Music Festival" <?php echo ($kategori == 'Music Festival') ? 'selected' : ''; ?>>Music Festival</option>
+                            <option value="Cultural Event" <?php echo ($kategori == 'Cultural Event') ? 'selected' : ''; ?>>Cultural Event</option>
+                            <option value="Automotive Festival" <?php echo ($kategori == 'Automotive Festival') ? 'selected' : ''; ?>>Automotive Festival</option>
+                            <option value="Bazaar" <?php echo ($kategori == 'Bazaar') ? 'selected' : ''; ?>>Bazaar</option>
+                            <option value="Organizational Event" <?php echo ($kategori == 'Organizational Event') ? 'selected' : ''; ?>>Organizational Event</option>
+                        </select>
+                    </div>
+                    <!-- Tambah elemen input untuk tanggal -->
+                    <div class="mb-3">
+                        <label for="tanggal" class="form-label">Tanggal</label>
+                        <input type="date" class="form-control" id="tanggal" name="tanggal" value="<?php echo $tanggal; ?>">
+                    </div>
+                    <input type="text" name="static_map_url" placeholder="Static Map URL" value="<?php echo $static_map_url; ?>"><br>
+                    <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                    <!-- Tombol untuk menutup form edit -->
+                    <button type="button" class="btn btn-secondary btn-sm close-btn" data-eventid="<?php echo $id; ?>">Tutup</button>
+                </form>
+            </div>
+
             <?php } ?>
         </div>
         <!-- Tombol Tambah -->
@@ -226,6 +264,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </section>
 
+
+<!-- Form Tambah Event -->
 <!-- Form Tambah Event -->
 <!-- Form Tambah Event -->
 <div class="container add-event-form" id="addEventForm" style="display:none;">
@@ -255,6 +295,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select>
         </div>
         <div class="mb-3">
+            <label for="tanggal" class="form-label">Tanggal</label>
+            <input type="date" class="form-control" id="tanggal" name="tanggal">
+        </div>
+        <div class="mb-3">
             <label for="static_map_url" class="form-label">Static Map URL</label>
             <input type="text" class="form-control" id="static_map_url" name="static_map_url">
         </div>
@@ -267,6 +311,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="button" class="btn btn-secondary" id="closeAddForm">Tutup</button>
     </form>
 </div>
+
 
 
 

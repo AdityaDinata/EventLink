@@ -51,6 +51,7 @@ if(isset($_POST['logout'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="images/logo3.png" rel="icon">
     <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
@@ -98,6 +99,9 @@ if(isset($_POST['logout'])){
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" style="font-size: 15px;" href="#contact">Kontak</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" style="font-size: 15px;" href="add_event.php">Tambah Event</a>
                     </li>
                 </ul>
                 <form class="d-flex" method="post" action="login_register.php">
@@ -296,28 +300,31 @@ if(isset($_POST['logout'])){
         <h1 class="heading">Paket <span>Member</span></h1>
   
         <div class="box-container">
+          <!-- Basic Membership -->
           <div class="box">
-            <h3 class="title">Basic</h3>
-            <h3 class="amount">Rp10.000</h3>
-            <ul>
-              <li><i class="fas fa-check"></i>Akses ke Semua Agenda Acara</li>
-              <li><i class="fas fa-check"></i>Pencarian Acara</li>
-              <li><i class="fas fa-check"></i>Detail Acara</li>
-              <li><i class="fas fa-check"></i>Penyimpanan Acara</li>
-            </ul>
-            <a href="#" class="btn">Beli</a>
+              <h3 class="title">Basic</h3>
+              <h3 class="amount">Rp10.000</h3>
+              <ul>
+                  <li><i class="fas fa-check"></i> Akses ke Semua Agenda Acara</li>
+                  <li><i class="fas fa-check"></i> Detail Acara</li>
+                  <li><i class="fas fa-check"></i> Penyimpanan Acara</li>
+              </ul>
+              <a href="purchase.php?member=Basic" class="btn">Beli</a>
           </div>
-  
+
+          <!-- Premium Membership -->
           <div class="box">
-            <h3 class="title">Permium</h3>
-            <h3 class="amount">50.000</h3>
-            <ul>
-              <li><i class="fas fa-check"></i>Semua Fitur Paket Basic</li>
-              <li><i class="fas fa-check"></i>Notifikasi Prioritas</li>
-              <li><i class="fas fa-check"></i>Diskon 10%</li>
-            </ul>
-            <a href="#" class="btn">Beli</a>
+              <h3 class="title">Premium</h3>
+              <h3 class="amount">50.000</h3>
+              <ul>
+                  <li><i class="fas fa-check"></i> Semua Fitur Paket Basic</li>
+                  <li><i class="fas fa-check"></i> Tambah event</li>
+                  <li><i class="fas fa-check"></i> Diskon Tiket 10%</li>
+                  
+              </ul>
+              <a href="purchase.php?member=Premium" class="btn">Beli</a>
           </div>
+
         </div>
       </section>
   
@@ -399,7 +406,31 @@ if(isset($_POST['logout'])){
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-
+    <script>
+    function confirmPurchase(member) {
+        if (confirm("Apakah Anda yakin ingin membeli member " + member + "?")) {
+            // Jika dikonfirmasi, lakukan pembaruan di database
+            // Buat permintaan AJAX atau langsung lakukan pembaruan
+            // Misalnya, jika menggunakan AJAX:
+            $.ajax({
+                url: 'purchase.php',
+                type: 'POST',
+                data: { member: member },
+                success: function(response) {
+                    // Tampilkan pesan sukses atau lakukan tindakan lain
+                    alert("Member " + member + " berhasil dibeli!");
+                    // Kemungkinan pembaruan tampilan atau halaman
+                    location.reload(); // Muat ulang halaman jika diperlukan
+                },
+                error: function(xhr, status, error) {
+                    // Tangani kesalahan jika ada
+                    console.error(error);
+                    alert("Terjadi kesalahan saat membeli member " + member);
+                }
+            });
+        }
+    }
+</script>
       <script src="app.js"></script>
     </body>
 </html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="images/logo3.png" rel="icon">
     <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
@@ -71,7 +72,7 @@
             Selamat Datang Di 
             <span> EventLink Samarinda </span>
           </h3>
-          <a href="#" class="btn">Lihat Event</a>
+          <a href="login_register.php" class="btn">Lihat Event</a>
         </div>
       </section>
   
@@ -88,7 +89,7 @@
             </p>
             
             <br>
-            <a href="" class="white-text">Lihat Event</a>
+            <a href="login_register.php" class="white-text">Lihat Event</a>
           </div>
   
           <div class="box">
@@ -98,7 +99,7 @@
               Music Festival adalah kategori yang menyajikan berbagai festival musik yang memukau dari berbagai genre, mulai dari rock, pop, hip-hop, hingga musik elektronik. 
             </p>
             <br>
-            <a href="" class="white-text">Lihat Event</a>
+            <a href="login_register.php" class="white-text">Lihat Event</a>
           </div>
   
           <div class="box">
@@ -109,7 +110,7 @@
             </p>
             <br>
             
-            <a href="" class="white-text">Lihat Event</a>
+            <a href="login_register.php" class="white-text">Lihat Event</a>
           </div>
   
           <div class="box">
@@ -119,7 +120,7 @@
               Automotive Festival adalah kategori yang menghadirkan pameran otomotif yang mengagumkan dan memukau.
             </p>
             <br>
-            <a href="" class="white-text">Lihat Event</a>
+            <a href="login_register.php" class="white-text">Lihat Event</a>
           </div>
   
           <div class="box">
@@ -129,7 +130,7 @@
               Bazaar adalah kategori yang menawarkan pameran belanja yang seru dan memikat bagi para pengunjung.
             </p>
             <br>
-            <a href="" class="white-text">Lihat Event</a>
+            <a href="login_register.php" class="white-text">Lihat Event</a>
           </div>
   
           <div class="box">
@@ -139,7 +140,7 @@
               Organizational Event adalah kategori yang menawarkan berbagai kegiatan seperti konferensi, seminar, dan pelatihan.
             </p>
             <br>
-            <a href="" class="white-text"></a>
+            <a href="login_register.php" class="white-text"></a>
           </div>
         </div>
       </section>
@@ -161,7 +162,7 @@
             <p>
               Bergabunglah dengan kami dan jadilah bagian dari komunitas yang aktif dan bersemangat dalam mengikuti dan mendukung berbagai acara dan kegiatan yang menghidupkan Samarinda!
             </p>
-            <a href="#" class="btn">Daftar</a>
+            <a href="login_register.php" class="btn">Daftar</a>
           </div>
         </div>
       </section>
@@ -259,7 +260,7 @@
               <li><i class="fas fa-check"></i>Detail Acara</li>
               <li><i class="fas fa-check"></i>Penyimpanan Acara</li>
             </ul>
-            <a href="#" class="btn">Beli</a>
+            <a href="login_register.php" class="btn">Beli</a>
           </div>
   
           <div class="box">
@@ -267,10 +268,10 @@
             <h3 class="amount">50.000</h3>
             <ul>
               <li><i class="fas fa-check"></i>Semua Fitur Paket Basic</li>
-              <li><i class="fas fa-check"></i>Notifikasi Prioritas</li>
+              <li><i class="fas fa-check"></i>Tambah Acara</li>
               <li><i class="fas fa-check"></i>Diskon 10%</li>
             </ul>
-            <a href="#" class="btn">Beli</a>
+            <a href="login_register.php" class="btn">Beli</a>
           </div>
         </div>
       </section>
