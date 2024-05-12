@@ -1,10 +1,10 @@
 <?php
 
 function connectDB() {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "eventlink_database";
+    $servername = "sql213.infinityfree.com";
+    $username = "if0_36532171";
+    $password = "Aditya072004";
+    $dbname = "if0_36532171_eventlink";
 
     // Membuat koneksi
     $conn = new mysqli($servername, $username, $password, $dbname);

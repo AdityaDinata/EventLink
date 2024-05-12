@@ -185,15 +185,7 @@ if(isset($_POST['logout'])){
             </div>
         </div>
     </nav>
-        <!-- Formulir pencarian -->
-        <form class="d-flex mt-3 mb-3" method="GET" action="">
-        <input class="form-control me-2" type="search" placeholder="Cari acara..." aria-label="Search" name="keyword">
-        <select class="form-select me-2" aria-label="Default select example" name="category">
-            <option value="">Semua Kategori</option>
-            <!-- Tambahkan opsi kategori lainnya sesuai kebutuhan -->
-        </select>
-        <button class="btn btn-outline-primary" type="submit">Cari</button>
-     </form>
+
 
     <section class="page-section bg-light mb-2" id="katalogproduk">
         <div class="container">
