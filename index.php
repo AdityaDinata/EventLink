@@ -253,19 +253,18 @@
         <div class="box-container">
           <div class="box">
             <h3 class="title">Basic</h3>
-            <h3 class="amount">Rp10.000</h3>
+            <h3 class="amount"> Free </h3>
             <ul>
               <li><i class="fas fa-check"></i>Akses ke Semua Agenda Acara</li>
-              <li><i class="fas fa-check"></i>Pencarian Acara</li>
               <li><i class="fas fa-check"></i>Detail Acara</li>
-              <li><i class="fas fa-check"></i>Penyimpanan Acara</li>
+
             </ul>
             <a href="login_register.php" class="btn">Beli</a>
           </div>
   
           <div class="box">
             <h3 class="title">Permium</h3>
-            <h3 class="amount">50.000</h3>
+            <h3 class="amount">20.000</h3>
             <ul>
               <li><i class="fas fa-check"></i>Semua Fitur Paket Basic</li>
               <li><i class="fas fa-check"></i>Tambah Acara</li>
